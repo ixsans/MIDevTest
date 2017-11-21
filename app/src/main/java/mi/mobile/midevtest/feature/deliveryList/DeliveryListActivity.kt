@@ -70,8 +70,11 @@ class DeliveryListActivity : AppCompatActivity(), DeliveryListContract.View, OnR
     }
 
     override fun onError(errorMessage: String) {
-        view_error.visibility = View.VISIBLE
-        item_list.visibility = View.GONE
+        if(item_list.adapter == null || item_list.adapter.itemCount == 0)
+        {
+            view_error.visibility = View.VISIBLE
+            item_list.visibility = View.GONE
+        }
 
         Snackbar.make(toolbar, errorMessage, Snackbar.LENGTH_LONG).show()
     }
