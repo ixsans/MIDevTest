@@ -7,7 +7,7 @@
                                                  android:fitsSystemWindows="true"
                                                  tools:context="mi.mobile.midevtest.feature.deliveryList.DeliveryListActivity">
 
-    <include layout="@layout/app_bar" />
+    <include layout="@layout/app_bar"/>
 
     <FrameLayout
             android:id="@+id/frameLayout"
@@ -15,7 +15,14 @@
             android:layout_height="match_parent"
             app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-        <include layout="@layout/item_list"/>
+        <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+            <include layout="@layout/item_list"/>
+
+            <include layout="@layout/view_error"/>
+        </RelativeLayout>
     </FrameLayout>
 
 

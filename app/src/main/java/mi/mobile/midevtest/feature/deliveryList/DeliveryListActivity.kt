@@ -1,10 +1,13 @@
 package mi.mobile.midevtest.feature.deliveryList
 
 import android.os.Bundle
+import android.support.design.widget.Snackbar
 import android.support.v4.widget.SwipeRefreshLayout.OnRefreshListener
 import android.support.v7.app.AppCompatActivity
-import kotlinx.android.synthetic.main.activity_item_list.*
+import android.view.View
+import kotlinx.android.synthetic.main.app_bar.*
 import kotlinx.android.synthetic.main.item_list.*
+import kotlinx.android.synthetic.main.view_error.*
 import mi.mobile.midevtest.R
 import mi.mobile.midevtest.model.Delivery
 import mi.mobile.midevtest.model.DeliveryListApi
@@ -34,7 +37,8 @@ class DeliveryListActivity : AppCompatActivity(), DeliveryListContract.View, OnR
     private fun setupViews() {
         //setup toolbar
         setSupportActionBar(toolbar)
-        toolbar.title = title
+        toolbar.title = ""
+        text_toolbar.text = getString(R.string.title_delivery_list)
 
         //setup fragment
         if (delivery_detail_container != null) {
@@ -60,11 +64,16 @@ class DeliveryListActivity : AppCompatActivity(), DeliveryListContract.View, OnR
     }
 
     override fun showData(deliveries: List<Delivery>) {
+        view_error.visibility = View.GONE
+        item_list.visibility = View.VISIBLE
         item_list.adapter = DeliveryItemAdapter(this, deliveries, mTwoPane)
     }
 
     override fun onError(errorMessage: String) {
+        view_error.visibility = View.VISIBLE
+        item_list.visibility = View.GONE
 
+        Snackbar.make(toolbar, errorMessage, Snackbar.LENGTH_LONG).show()
     }
 
 
