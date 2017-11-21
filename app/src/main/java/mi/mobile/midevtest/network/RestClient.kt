@@ -23,7 +23,7 @@ interface RestClient
 
     companion object {
 
-        const val BASE_URL = "http://mi-mobile-dev.ap-southeast-1.elasticbeanstalk.com"
+        private const val BASE_URL = "http://mi-mobile-dev.ap-southeast-1.elasticbeanstalk.com"
 
         /**
          * Factory method

@@ -1,22 +1,35 @@
 package mi.mobile.midevtest.feature.deliveryDetail
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.support.v4.app.Fragment
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import kotlinx.android.synthetic.main.activity_item_detail.*
-import kotlinx.android.synthetic.main.item_detail.view.*
+import com.google.android.gms.maps.OnMapReadyCallback
+import com.squareup.picasso.Picasso
+import kotlinx.android.synthetic.main.row_delivery_item.*
 import mi.mobile.midevtest.R
 import mi.mobile.midevtest.model.Delivery
+import mi.mobile.midevtest.util.RoundedTransformation
+import com.google.android.gms.maps.SupportMapFragment
+import com.google.android.gms.maps.model.BitmapDescriptorFactory
+import com.google.android.gms.maps.model.MarkerOptions
+import com.google.android.gms.maps.model.LatLng
+import com.google.android.gms.maps.GoogleMap
+import com.google.android.gms.maps.CameraUpdateFactory
+import com.google.android.gms.maps.model.CameraPosition
+import org.jetbrains.anko.support.v4.toast
 
-/**
- * A fragment representing a single Item detail screen.
- * This fragment is either contained in a [DeliveryListActivity]
- * in two-pane mode (on tablets) or a [DeliveryDetailActivity]
- * on handsets.
- */
+
 class DeliveryDetailFragment : Fragment() {
+
+    companion object {
+        const val ARG_ITEM = "item"
+        const val MAP_ZOOM_LEVEL = 16F
+        const val MAP_ANIMATION_SPEED = 1000
+    }
 
     private var mItem: Delivery? = null
 
@@ -24,33 +37,64 @@ class DeliveryDetailFragment : Fragment() {
         super.onCreate(savedInstanceState)
 
         if (arguments.containsKey(ARG_ITEM)) {
-            // Load the dummy content specified by the fragment
-            // arguments. In a real-world scenario, use a Loader
-            // to load content from a content provider.
-            /*mItem = arguments.getParcelable<ARG_ITEM>()
-            mItem?.let {
-                activity.toolbar_layout?.title = it.description
-            }*/
+            mItem = arguments.getParcelable(DeliveryDetailFragment.ARG_ITEM)
         }
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
-                              savedInstanceState: Bundle?): View? {
-        val rootView = inflater.inflate(R.layout.item_detail, container, false)
+                              savedInstanceState: Bundle?): View? =
+            inflater.inflate(R.layout.fragment_detail, container, false)
 
-        // Show the dummy content as text in a TextView.
+    @SuppressLint("SetTextI18n")
+    override fun onViewCreated(view: View?, savedInstanceState: Bundle?)
+    {
+        super.onViewCreated(view, savedInstanceState)
+
         mItem?.let {
-            rootView.item_detail.text = it.description
+            text_address.text = it.location?.address + " (${it.location?.lat},${it.location?.lng})"
+            text_description.text = it.description
+            Picasso.with(context)
+                    .load(it.imageUrl)
+                    .error(R.drawable.default_thumbnail)
+                    .placeholder(R.drawable.default_thumbnail)
+                    .transform(RoundedTransformation(5, 5))
+                    .resize(300, 300)
+                    .onlyScaleDown()
+                    .into(image_thumbnail)
+
+            val mapFragment = childFragmentManager.findFragmentById(R.id.fragment_map)
+
+            if (mapFragment != null)
+            {
+                mapFragment as SupportMapFragment
+                mapFragment.getMapAsync({
+                    map ->
+                        val location = LatLng(mItem?.location?.lat!!, mItem?.location?.lng!!)
+                        val marker = MarkerOptions()
+                        marker.position(location)
+                        marker.icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_marker))
+                        map.addMarker(marker)
+
+                        val cameraPosition = CameraPosition.Builder()
+                                .target(location)
+                                .zoom(MAP_ZOOM_LEVEL)
+                                .build()
+
+                        map.animateCamera(
+                                CameraUpdateFactory.newCameraPosition(cameraPosition),
+                                MAP_ANIMATION_SPEED,
+                                object : GoogleMap.CancelableCallback {
+                                    override fun onFinish() {}
+                                    override fun onCancel() {}
+                                }
+                        )
+                })
+            }else
+            {
+                toast("SSSS")
+            }
         }
-
-        return rootView
     }
 
-    companion object {
-        /**
-         * The fragment argument representing the item ID that this fragment
-         * represents.
-         */
-        const val ARG_ITEM = "item"
-    }
+
 }

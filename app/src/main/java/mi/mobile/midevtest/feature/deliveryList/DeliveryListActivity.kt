@@ -25,7 +25,7 @@ class DeliveryListActivity : AppCompatActivity(), DeliveryListContract.View, OnR
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_item_list)
+        setContentView(R.layout.activity_delivery_list)
 
         setupViews()
 
@@ -37,8 +37,7 @@ class DeliveryListActivity : AppCompatActivity(), DeliveryListContract.View, OnR
     private fun setupViews() {
         //setup toolbar
         setSupportActionBar(toolbar)
-        toolbar.title = ""
-        text_toolbar.text = getString(R.string.title_delivery_list)
+        supportActionBar?.title = getString(R.string.title_delivery_list)
 
         //setup fragment
         if (delivery_detail_container != null) {

@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                xmlns:tools="http://schemas.android.com/tools"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
+              xmlns:tools="http://schemas.android.com/tools"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:orientation="vertical">
 
     <RelativeLayout
             android:layout_width="match_parent"
@@ -32,14 +32,26 @@
                     android:textColor="#282424"
                     android:textSize="18sp"/>
 
-            <TextView
-                    android:id="@+id/text_address"
+            <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    tools:text="Address"
-                    android:textSize="14sp"
-                    android:textColor="#8e8686"
-                    android:layout_marginTop="4dp"/>
+                    android:layout_marginTop="4dp"
+                    android:orientation="horizontal">
+
+                <ImageView
+                        android:layout_width="12dp"
+                        android:layout_height="12dp"
+                        android:layout_marginTop="4dp"
+                        android:src="@drawable/ic_address"/>
+                <TextView
+                        android:id="@+id/text_address"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        tools:text="Address"
+                        android:layout_marginLeft="8dp"
+                        android:textSize="14sp"
+                        android:textColor="#8e8686"/>
+            </LinearLayout>
         </LinearLayout>
 
 

@@ -1,6 +1,7 @@
 package mi.mobile.midevtest.feature.deliveryList
 
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
@@ -9,8 +10,9 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import com.squareup.picasso.Picasso
-import kotlinx.android.synthetic.main.item_list_content.view.*
+import kotlinx.android.synthetic.main.row_delivery_item.view.*
 import mi.mobile.midevtest.R
+import mi.mobile.midevtest.feature.deliveryDetail.DeliveryDetailActivity
 import mi.mobile.midevtest.feature.deliveryDetail.DeliveryDetailFragment
 import mi.mobile.midevtest.model.Delivery
 import mi.mobile.midevtest.util.RoundedTransformation
@@ -32,17 +34,17 @@ class DeliveryItemAdapter( private val mParentActivity: DeliveryListActivity,
             if (mTwoPane) {
                 val fragment = DeliveryDetailFragment().apply {
                     arguments = Bundle()
-                    //arguments.putString(DeliveryDetailFragment.ARG_ITEM, item)
+                    arguments.putParcelable(DeliveryDetailFragment.ARG_ITEM, item)
                 }
                 mParentActivity.supportFragmentManager
                         .beginTransaction()
                         .replace(R.id.delivery_detail_container, fragment)
                         .commit()
             } else {
-               /* val intent = Intent(v.context, DeliveryDetailActivity::class.java).apply {
-                    putExtra(DeliveryDetailFragment.ARG_ITEM, item.id)
+                val intent = Intent(v.context, DeliveryDetailActivity::class.java).apply {
+                    putExtra(DeliveryDetailFragment.ARG_ITEM, item)
                 }
-                v.context.startActivity(intent)*/
+                v.context.startActivity(intent)
             }
         }
     }
@@ -50,7 +52,7 @@ class DeliveryItemAdapter( private val mParentActivity: DeliveryListActivity,
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         mContext = parent.context
         val view = LayoutInflater.from(parent.context)
-                .inflate(R.layout.item_list_content, parent, false)
+                .inflate(R.layout.row_delivery_item, parent, false)
         return ViewHolder(view)
     }
 

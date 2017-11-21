@@ -1,29 +1,19 @@
-<?xml version="1.0" encoding="utf-8"?>
 <android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
                                                  xmlns:app="http://schemas.android.com/apk/res-auto"
                                                  xmlns:tools="http://schemas.android.com/tools"
                                                  android:layout_width="match_parent"
                                                  android:layout_height="match_parent"
                                                  android:fitsSystemWindows="true"
-                                                 tools:context="mi.mobile.midevtest.feature.deliveryList.DeliveryListActivity">
+                                                 tools:context="mi.mobile.midevtest.feature.deliveryDetail.DeliveryDetailActivity"
+                                                 tools:ignore="MergeRootFrame">
 
     <include layout="@layout/app_bar"/>
 
     <FrameLayout
-            android:id="@+id/frameLayout"
+            android:id="@+id/delivery_detail_container"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            app:layout_behavior="@string/appbar_scrolling_view_behavior">
-
-        <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-
-            <include layout="@layout/item_list"/>
-
-            <include layout="@layout/view_error"/>
-        </RelativeLayout>
-    </FrameLayout>
+            app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
 
 
 </android.support.design.widget.CoordinatorLayout>
