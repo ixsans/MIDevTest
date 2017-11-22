@@ -6,4 +6,6 @@
     <string name="empty_message">There\'s no delivery item yet.</string>
     <string name="error_loading_content">Error loading content.</string>
     <string name="no_item">No Item</string>
+    <string name="welcome_message">Let\'s Track Your Delivery Items</string>
+    <string name="hello">Hello!</string>
 </resources>

@@ -24,7 +24,7 @@ class DeliveryDetailActivity : AppCompatActivity() {
             val fragment = DeliveryDetailFragment()
             fragment.arguments = arguments
             supportFragmentManager.beginTransaction()
-                    .add(R.id.delivery_detail_container, fragment)
+                    .replace(R.id.delivery_detail_container, fragment)
                     .commit()
         }
     }

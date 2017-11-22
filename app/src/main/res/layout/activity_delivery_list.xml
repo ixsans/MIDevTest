@@ -6,22 +6,15 @@
                                                  android:layout_height="match_parent"
                                                  android:fitsSystemWindows="true"
                                                  tools:context="mi.mobile.midevtest.feature.deliveryList.DeliveryListActivity">
-
     <include layout="@layout/app_bar"/>
-
     <FrameLayout
             android:id="@+id/frameLayout"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             app:layout_behavior="@string/appbar_scrolling_view_behavior">
-
-
         <include layout="@layout/item_list"/>
-
         <include layout="@layout/view_error"/>
-
         <include layout="@layout/view_empty"/>
     </FrameLayout>
-
 
 </android.support.design.widget.CoordinatorLayout>
