@@ -8,6 +8,7 @@
         android:layout_centerInParent="true"
         android:gravity="center"
         android:padding="16dp"
+        android:background="@color/app_background"
         android:orientation="vertical">
 
     <ImageView
@@ -15,19 +16,19 @@
             android:layout_height="100dp"
             android:layout_gravity="center"
             android:src="@drawable/ic_empty"/>
-    <TextView
+    <mi.mobile.midevtest.view.MITextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/no_item"
-            android:textSize="18sp"
+            android:textSize="20sp"
             android:layout_marginTop="8dp"
             android:layout_gravity="center_horizontal"
             android:layout_centerInParent="true" />
 
-    <TextView
+    <mi.mobile.midevtest.view.MITextView
             android:id="@+id/text_empty_message"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="16sp"
+            android:textSize="18sp"
             android:layout_gravity="center_horizontal"  />
 </LinearLayout>

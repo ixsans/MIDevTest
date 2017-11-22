@@ -3,6 +3,7 @@ package mi.mobile.midevtest.feature.deliveryList
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.support.v4.content.ContextCompat
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
@@ -16,22 +17,30 @@ import mi.mobile.midevtest.feature.deliveryDetail.DeliveryDetailActivity
 import mi.mobile.midevtest.feature.deliveryDetail.DeliveryDetailFragment
 import mi.mobile.midevtest.model.Delivery
 import mi.mobile.midevtest.util.RoundedTransformation
+import org.jetbrains.anko.backgroundColor
+
 
 /**
  * Created by ikhsan on 21/11/17.
  */
-class DeliveryItemAdapter( private val mParentActivity: DeliveryListActivity,
-                           private val mValues: List<Delivery>,
-                           private val mTwoPane: Boolean) :
+class DeliveryItemAdapter(private val mParentActivity: DeliveryListActivity,
+                          private val mValues: List<Delivery>,
+                          private val mTwoPane: Boolean) :
         RecyclerView.Adapter<DeliveryItemAdapter.ViewHolder>() {
 
     private val mOnClickListener: View.OnClickListener
     private lateinit var mContext: Context
+    private var selectedItem: Delivery? = null
 
     init {
         mOnClickListener = View.OnClickListener { v ->
             val item = v.tag as Delivery
             if (mTwoPane) {
+                // set selection
+                selectedItem = item
+                notifyDataSetChanged()
+
+                // show detail on the right pane
                 val fragment = DeliveryDetailFragment().apply {
                     arguments = Bundle()
                     arguments.putParcelable(DeliveryDetailFragment.ARG_ITEM, item)
@@ -62,12 +71,20 @@ class DeliveryItemAdapter( private val mParentActivity: DeliveryListActivity,
         holder.mAddressText.text = item.location?.address
         Picasso.with(mContext)
                 .load(item.imageUrl)
-                .error(R.drawable.default_thumbnail)
-                .placeholder(R.drawable.default_thumbnail)
+                .error(R.drawable.ic_default_thumbnail)
+                .placeholder(R.drawable.ic_default_thumbnail)
                 .transform(RoundedTransformation(5, 5))
                 .resize(300, 300)
                 .onlyScaleDown()
                 .into(holder.mThumbnailImage)
+
+        // control selection for multi-pane layout
+        if (selectedItem == item) {
+            holder.itemView.backgroundColor = ContextCompat.getColor(mContext,
+                    R.color.colorAccent)
+        } else {
+            holder.itemView.background = null
+        }
 
         with(holder.itemView) {
             tag = item

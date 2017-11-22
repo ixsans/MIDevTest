@@ -1,0 +1,5 @@
+<resources>
+    <declare-styleable name="MIFontTextView">
+        <attr name="fonts" format="string"/>
+    </declare-styleable>
+</resources>

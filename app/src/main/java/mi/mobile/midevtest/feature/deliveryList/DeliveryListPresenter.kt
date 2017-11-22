@@ -13,11 +13,13 @@ class DeliveryListPresenter(private var view: DeliveryListContract.View,
     {
         view.showLoading()
 
+        // load data from local
         val items = DataStore.loadLocalDeliveryItems()
         if (items.isNotEmpty()) {
             view.showData(items)
         }
 
+        // sync data from server
         api.fetchDeliveries({ result ->
             if (result.isNotEmpty())
             {

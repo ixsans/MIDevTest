@@ -12,7 +12,9 @@ import kotlinx.android.synthetic.main.view_error.*
 import mi.mobile.midevtest.R
 import mi.mobile.midevtest.model.Delivery
 import mi.mobile.midevtest.model.DeliveryListApi
+import mi.mobile.midevtest.util.Util
 import org.jetbrains.anko.support.v4.onRefresh
+
 
 class DeliveryListActivity : AppCompatActivity(), DeliveryListContract.View, OnRefreshListener {
 
@@ -41,6 +43,7 @@ class DeliveryListActivity : AppCompatActivity(), DeliveryListContract.View, OnR
         //setup toolbar
         setSupportActionBar(toolbar)
         supportActionBar?.title = getString(R.string.title_delivery_list)
+        Util.changeToolbarFont(toolbar, this)
 
         //define layout type
         if (delivery_detail_container != null) {
@@ -73,6 +76,7 @@ class DeliveryListActivity : AppCompatActivity(), DeliveryListContract.View, OnR
 
     override fun onEmptyData() {
         view_error.visibility = View.GONE
+        item_list.visibility = View.GONE
         view_empty.visibility = View.VISIBLE
         text_empty_message.text = getString(R.string.empty_message)
     }

@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity
 import android.view.MenuItem
 import kotlinx.android.synthetic.main.app_bar.*
 import mi.mobile.midevtest.R
+import mi.mobile.midevtest.util.Util
 
 
 class DeliveryDetailActivity : AppCompatActivity() {
@@ -14,8 +15,8 @@ class DeliveryDetailActivity : AppCompatActivity() {
         setContentView(R.layout.activity_delivery_detail)
         setSupportActionBar(toolbar)
         supportActionBar?.title = getString(R.string.title_detail)
-
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        Util.changeToolbarFont(toolbar, this)
 
         if (savedInstanceState == null) {
             val arguments = Bundle()

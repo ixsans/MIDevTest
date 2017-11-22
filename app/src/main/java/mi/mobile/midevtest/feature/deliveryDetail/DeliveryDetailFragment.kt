@@ -14,7 +14,7 @@ import com.google.android.gms.maps.model.CameraPosition
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
 import com.squareup.picasso.Picasso
-import kotlinx.android.synthetic.main.row_delivery_item.*
+import kotlinx.android.synthetic.main.view_content_detail.*
 import mi.mobile.midevtest.R
 import mi.mobile.midevtest.model.Delivery
 import mi.mobile.midevtest.util.RoundedTransformation
@@ -52,8 +52,8 @@ class DeliveryDetailFragment : Fragment() {
             text_description.text = it.description
             Picasso.with(context)
                     .load(it.imageUrl)
-                    .error(R.drawable.default_thumbnail)
-                    .placeholder(R.drawable.default_thumbnail)
+                    .error(R.drawable.ic_default_thumbnail)
+                    .placeholder(R.drawable.ic_default_thumbnail)
                     .transform(RoundedTransformation(5, 5))
                     .resize(300, 300)
                     .onlyScaleDown()
