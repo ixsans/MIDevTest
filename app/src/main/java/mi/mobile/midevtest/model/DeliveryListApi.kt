@@ -4,6 +4,7 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
 import mi.mobile.midevtest.network.RestClient
+import mi.mobile.midevtest.util.NetworkUtil
 
 /**
  * Created by ikhsan on 21/11/17.
@@ -18,11 +19,11 @@ class DeliveryListApi
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(
-                        { result ->
-                            onSuccess.invoke(result)
+                        {
+                            result -> onSuccess.invoke(result)
                         },
                         {
-                            onFailed.invoke("Error")
+                            e -> onFailed.invoke(NetworkUtil.getErrorMessage(e))
                         }
                 )
     }
