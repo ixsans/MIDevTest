@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity
 import android.view.View
 import kotlinx.android.synthetic.main.app_bar.*
 import kotlinx.android.synthetic.main.item_list.*
+import kotlinx.android.synthetic.main.view_empty.*
 import kotlinx.android.synthetic.main.view_error.*
 import mi.mobile.midevtest.R
 import mi.mobile.midevtest.model.Delivery
@@ -29,8 +30,10 @@ class DeliveryListActivity : AppCompatActivity(), DeliveryListContract.View, OnR
 
         setupViews()
 
+        //init presenter
         mPresenter = DeliveryListPresenter(this, DeliveryListApi())
 
+        //fetch data
         onRefresh()
     }
 
@@ -39,7 +42,7 @@ class DeliveryListActivity : AppCompatActivity(), DeliveryListContract.View, OnR
         setSupportActionBar(toolbar)
         supportActionBar?.title = getString(R.string.title_delivery_list)
 
-        //setup fragment
+        //define layout type
         if (delivery_detail_container != null) {
             // The detail container view will be present only in the
             // large-screen layouts (res/values-w900dp).
@@ -48,7 +51,7 @@ class DeliveryListActivity : AppCompatActivity(), DeliveryListContract.View, OnR
             mTwoPane = true
         }
 
-        //setup swipe refresh
+        //setup swipe refresh layour
         swipe_refresh.onRefresh { onRefresh() }
     }
 
@@ -68,13 +71,18 @@ class DeliveryListActivity : AppCompatActivity(), DeliveryListContract.View, OnR
         item_list.adapter = DeliveryItemAdapter(this, deliveries, mTwoPane)
     }
 
+    override fun onEmptyData() {
+        view_error.visibility = View.GONE
+        view_empty.visibility = View.VISIBLE
+        text_empty_message.text = getString(R.string.empty_message)
+    }
+
     override fun onError(errorMessage: String) {
         if(item_list.adapter == null || item_list.adapter.itemCount == 0)
         {
             view_error.visibility = View.VISIBLE
             item_list.visibility = View.GONE
         }
-
         Snackbar.make(toolbar, errorMessage, Snackbar.LENGTH_LONG).show()
     }
 

@@ -19,14 +19,19 @@ class DeliveryListPresenter(private var view: DeliveryListContract.View,
         }
 
         api.fetchDeliveries({ result ->
-            if (result.isNotEmpty()) DataStore.saveDeliveryItems(result)
-            view.showData(result)
+            if (result.isNotEmpty())
+            {
+                DataStore.saveDeliveryItems(result)
+                view.showData(result)
+            }else
+            {
+                view.onEmptyData()
+            }
             view.showLoading(false)
         }, { error ->
             view.onError(error)
             view.showLoading(false)
         })
-
 
     }
 }

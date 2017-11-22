@@ -3,4 +3,7 @@
     <string name="title_item_detail">Item Detail</string>
     <string name="title_delivery_list">Things to Deliver</string>
     <string name="title_detail">Delivery Details</string>
+    <string name="empty_message">There\'s no delivery item yet.</string>
+    <string name="error_loading_content">Error loading content.</string>
+    <string name="no_item">No Item</string>
 </resources>

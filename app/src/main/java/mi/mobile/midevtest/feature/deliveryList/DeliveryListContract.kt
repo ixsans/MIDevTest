@@ -13,6 +13,8 @@ class DeliveryListContract
 
         fun showData(deliveries: List<Delivery>)
 
+        fun onEmptyData()
+
         fun onError(errorMessage: String)
     }
 
