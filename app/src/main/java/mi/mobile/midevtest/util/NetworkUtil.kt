@@ -1,6 +1,5 @@
 package mi.mobile.midevtest.util
 
-import com.google.gson.GsonBuilder
 import retrofit2.HttpException
 import java.net.HttpURLConnection
 
@@ -25,7 +24,7 @@ class NetworkUtil
             }else if (e is IllegalStateException) {
                 errorMessage + " " + e.localizedMessage
             }else {
-                "Something wen't wrong"
+                "Something went wrong"
             }
             return errorMessage
         }
